@@ -5,7 +5,8 @@ const userRoutes = require('./routes/users')
 const app = express()
 
 mongoose.connect('mongodb://localhost/auth', {useNewUrlParser:true})
-
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
 
 //middleware
 app.use(express.json())
