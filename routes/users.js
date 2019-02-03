@@ -1,11 +1,12 @@
 const express=  require('express')
 const router =  express.Router()
 const JWT = require('jsonwebtoken')
-
+const passport = require('passport')
+const passConfig = require('../passport')
 const { JWT_SECRET } = require('../config/config')
 
 //create a  JWT token function
-tokenFunc = user =>{
+tokenFunc = (user) =>{
     return JWT.sign({
         iss : 'zhm',
         sub: user.id,
@@ -37,8 +38,8 @@ router.post('/login', async(req,res,next) =>{
     console.log('login')
 })
 
-router.get('/secret', async(req,res,next) =>{
-    console.log('secret')
+router.get('/secret',passport.authenticate('jwt', {session: false}), async(req,res,next) =>{
+    console.log('im here ')
 })
 
 
